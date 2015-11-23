@@ -11,12 +11,27 @@ module.exports = generator.NamedBase.extend({
       desc: 'Create a stateless component instead of a full one',
       defaults: false
     });
+
+    this.option('transmit', {
+      desc: 'Add Transmit boilerplate',
+      defaults: true
+    });
+
+    this.argument('transmitFragmentName', {
+      desc: 'Transmit fragment name',
+      type: String,
+      defaults: 'myFragment',
+      required: false
+    });
   },
 
   writing: function() {
 
     let settings = utils.yeoman.getAllSettingsFromComponentName(this.name, this.config.get('style'));
     let componentType = this.options.stateless ? 'Stateless' : 'Base';
+
+    settings.transmitFragmentName = this.transmitFragmentName;
+    settings.componentUsesTransmit = this.options.transmit;
 
     // Create the style template
     this.fs.copyTpl(

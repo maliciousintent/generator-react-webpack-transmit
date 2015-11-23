@@ -1,19 +1,43 @@
 'use strict';
 
 import React from 'react';
+<% if (componentUsesTransmit) { %>import Transmit from 'react-transmit';
+
+// @TODO: import API config
+// import { API_BASE_URL } from '../api';<% } %>
 
 require('<%= style.webpackPath %>');
 
-let <%= component.className %> = (props) => (
-  <div className="<%= style.className %>">
-    Please edit <%= component.path %>/<%= component.fileName %> to update this component!
-  </div>
-);
+const <%= component.className %> = (props) => {
+  <% if (componentUsesTransmit) { %>const { <%= transmitFragmentName %> } = props; <% } %>
+
+  return (
+    <div className="<%= style.className %>">
+      Please edit <%= component.path %>/<%= component.fileName %> to update this component!
+    </div>
+  );
+};
 
 <%= component.className %>.displayName = '<%= component.displayName %>';
 
 // Uncomment properties you need
-// <%= component.className %>.propTypes = {};
+<% if (componentUsesTransmit) { %><%= component.className %>.propTypes = {
+  <%= transmitFragmentName %>: React.PropTypes.Object,
+};
+<% } else { %>// <%= component.className %>.propTypes = {};<% } %>
 // <%= component.className %>.defaultProps = {};
 
-export default <%= component.className %>;
+<% if (componentUsesTransmit) { %>
+export default Transmit.createContainer(<%= component.className %>, {
+  initialVariables: {
+  },
+
+  fragments: {
+    <%= transmitFragmentName %>({ <%= transmitFragmentName %>Id }) {
+      // @TODO: Fetch from API
+      // return fetch(API_BASE_URL + '?id=' + <%= transmitFragmentName %>Id).then(body => { return body.json(); })
+      // .then(<%= transmitFragmentName %> => <%= transmitFragmentName %>);
+    },
+  },
+});<% } else { %>
+export default <%= component.className %>;<% } %>
