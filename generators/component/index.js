@@ -14,7 +14,7 @@ module.exports = generator.NamedBase.extend({
 
     this.option('transmit', {
       desc: 'Add Transmit boilerplate',
-      defaults: true
+      defaults: false
     });
 
     this.argument('transmitFragmentName', {
@@ -31,7 +31,7 @@ module.exports = generator.NamedBase.extend({
     let componentType = this.options.stateless ? 'Stateless' : 'Base';
 
     settings.transmitFragmentName = this.transmitFragmentName;
-    settings.componentUsesTransmit = this.options.transmit;
+    settings.componentUsesTransmit = this.options.transmit === true;
 
     // Create the style template
     this.fs.copyTpl(
