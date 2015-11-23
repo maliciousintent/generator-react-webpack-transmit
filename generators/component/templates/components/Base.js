@@ -1,7 +1,7 @@
 // Component: <%= component.displayName %>
 
 import React from 'react';
-import { Router, Route, Link } from 'react-router'
+import { Router, Route, Link } from 'react-router';
 <% if (componentUsesTransmit) { %>import Transmit from 'react-transmit';
 
 // @TODO: import API config
