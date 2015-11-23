@@ -10,7 +10,7 @@ import { Router, Route, Link } from 'react-router';
 require('<%= style.webpackPath %>');
 
 const <%= component.className %> = (props) => {
-  <% if (componentUsesTransmit) { %>const { <%= transmitFragmentName %> } = props; <% } %>
+  <% if (componentUsesTransmit) { %>const { <%= transmitFragmentName %> } = props;<% } %>
 
   return (
     <div className="<%= style.className %>">

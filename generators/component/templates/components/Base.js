@@ -12,7 +12,7 @@ require('<%= style.webpackPath %>');
 
 class <%= component.className %> extends React.Component {
   render() {
-    <% if (componentUsesTransmit) { %>const { <%= transmitFragmentName %> } = this.props; <% } %>
+    <% if (componentUsesTransmit) { %>const { <%= transmitFragmentName %> } = this.props;<% } %>
     return (
       <div className="<%= style.className %>">
         Please edit <%= component.path %>/<%= component.fileName %> to update this component!
